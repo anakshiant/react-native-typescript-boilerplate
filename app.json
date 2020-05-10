@@ -1,0 +1,17 @@
+{
+  "name": "kametee",
+  "displayName": "kametee",
+  "expo": {
+    "name": "kametee",
+    "slug": "kametee",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
