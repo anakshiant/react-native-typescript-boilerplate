@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 
-const API_URL: string = "http://13.127.1.188:8000/";
+const API_URL: string = "https://www.flickr.com/services";
 
 export type ApiSuccessResponse<T> = {
   type: "success";

@@ -2,16 +2,16 @@ import { combineReducers, createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { State } from "./types";
 
-import * as auth from "./reducers/authReducer";
+import * as photo from "./reducers/photoReducer";
 
 const middelwares = applyMiddleware(thunk);
 
 const initialState: State = {
-  auth: auth.initialState,
+  photo: photo.initialState,
 };
 
 const reducer = combineReducers({
-  auth: auth.handler,
+  photo: photo.handler,
 });
 
 export const store = createStore(reducer, initialState, middelwares);

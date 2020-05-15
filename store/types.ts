@@ -4,19 +4,17 @@ import {
   TypedUseSelectorHook,
 } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
+import { Photos, FlickrResponse, Photo } from "../services/flickr/dto";
 
-export type Profile = {
-  firstName: string;
-  lastName: string;
-  mobileNumber: string;
-  email: string;
-};
+export type GridType = 2 | 3 | 4;
 
-export type AuthState = {
-  profile: Profile;
-  otp?: number;
-  token: string;
-  authenticated: boolean;
+export type PhotoGrid = Photo[][];
+
+export type PhotoState = {
+  photos: Photos;
+  gridType: GridType;
+  previousSearches: string[];
+  currentSearch: string;
 };
 
 export type BaseState<T> = {
@@ -26,46 +24,35 @@ export type BaseState<T> = {
 };
 
 export type State = {
-  auth: BaseState<AuthState>;
+  photo: BaseState<PhotoState>;
 };
 
 export type Action =
   | {
-      type: "AUTH_REGISTER_START";
+      type: "SEARCH_PHOTO_START";
     }
   | {
-      type: "AUTH_REGISTER_SUCCESS";
-      profile: Profile;
-      token: string;
+      type: "SEARCH_PHOTO_SUCCESS";
+      payload: FlickrResponse;
+      meta: {
+        append: boolean;
+      };
     }
   | {
-      type: "AUTH_REGISTER_ERROR";
-      message: string;
+      type: "SEARCH_PHOTO_ERROR";
+      error?: string;
     }
   | {
-      type: "AUTH_LOGIN_START";
+      type: "GET_PREVIOUS_SEARCH_ITEM_SUCCESS";
+      payload: Photo[];
     }
   | {
-      type: "AUTH_LOGIN_SUCCESS";
-      token: string;
+      type: "SET_GRID_TYPE";
+      payload: GridType;
     }
   | {
-      type: "AUTH_LOGIN_ERROR";
-      message: string;
-    }
-  | {
-      type: "AUTH_OTP_VERIFY_START";
-    }
-  | {
-      type: "AUTH_OTP_VERIFY_SUCCESS";
-      otp: number;
-    }
-  | {
-      type: "AUTH_OTP_VERIFY_ERROR";
-      message: string;
-    }
-  | {
-      type: "AUTH_SET_AUTHENTICATED";
+      type: "SET_SEARCH";
+      payload: string;
     };
 
 // https://app.gethyperdoc.com/t/ggX26ODro8oRVAOUnaZ3

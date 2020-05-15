@@ -1,11 +1,15 @@
-/**
- * Shoout out to those developers who still use form data
- * @param data
- */
-export const objectToFormData = (data: any): FormData => {
-  const formData = new FormData();
-  Object.entries(data).forEach((entry: [string, any]) => {
-    formData.append(entry[0], entry[1]);
-  });
-  return formData;
+import { Photo } from "../services/flickr/dto";
+
+export const processPhotoGrid = (photos: Photo[], count: number) => {
+  return photos.reduce(
+    (accumlator: Photo[][], current: Photo) => {
+      if (accumlator[accumlator.length - 1].length < count) {
+        accumlator[accumlator.length - 1].push(current);
+      } else {
+        accumlator.push([current]);
+      }
+      return accumlator;
+    },
+    [[]]
+  );
 };
