@@ -4,56 +4,36 @@ import {
   TypedUseSelectorHook,
 } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
-import { Photos, FlickrResponse, Photo } from "../services/flickr/dto";
 
-export type GridType = 2 | 3 | 4;
+export type Category = "Starter" | "Main Course" | "Dessert" | "Drinks";
 
-export type PhotoGrid = Photo[][];
+export const categories: Category[] = [
+  "Starter",
+  "Main Course",
+  "Dessert",
+  "Drinks",
+];
 
-export type PhotoState = {
-  photos: Photos;
-  gridType: GridType;
-  previousSearches: string[];
-  currentSearch: string;
-};
-
-export type BaseState<T> = {
-  error?: string;
-  processing: boolean;
-  data: T;
+export type Dish = {
+  id: string;
+  name: string;
+  info: string;
+  price: number;
+  category: Category;
 };
 
 export type State = {
-  photo: BaseState<PhotoState>;
+  dishes: Record<string, Dish>; // dish id > Dish
+  cart: Record<string, number>; // dish id  > quanitty
 };
 
+// since there are no network requests just add them directly
+// unless we should have processing, error keys
+
 export type Action =
-  | {
-      type: "SEARCH_PHOTO_START";
-    }
-  | {
-      type: "SEARCH_PHOTO_SUCCESS";
-      payload: FlickrResponse;
-      meta: {
-        append: boolean;
-      };
-    }
-  | {
-      type: "SEARCH_PHOTO_ERROR";
-      error?: string;
-    }
-  | {
-      type: "GET_PREVIOUS_SEARCH_ITEM_SUCCESS";
-      payload: Photo[];
-    }
-  | {
-      type: "SET_GRID_TYPE";
-      payload: GridType;
-    }
-  | {
-      type: "SET_SEARCH";
-      payload: string;
-    };
+  | { type: "DISHES_GET_SUCCESS"; dishes: Dish[] }
+  | { type: "CART_ITEM_ADD"; dishId: string }
+  | { type: "CART_ITEM_REMOVE"; dishId: string };
 
 // https://app.gethyperdoc.com/t/ggX26ODro8oRVAOUnaZ3
 export const useSelector: TypedUseSelectorHook<State> = useReduxSelector;

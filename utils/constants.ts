@@ -1,6 +1,8 @@
 export const COLOR = {
-  PRIMARY: "#607d8b",
+  PRIMARY: "#ffa726",
   WHITE: "white",
-  GREY: "#546e7a",
+  BLACK: "#333333",
+  GREY: "#263238",
   SELECTED: "#546e7a",
+  LIGHT_GREY: "#eceff1",
 };

@@ -1,45 +1,26 @@
-import React, { useEffect } from "react";
-import { Provider } from "react-redux";
-import { store } from "./store";
+import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import {
-  createStackNavigator,
-  StackHeaderProps,
-} from "@react-navigation/stack";
+import { Provider } from "react-redux";
+import { createStackNavigator } from "@react-navigation/stack";
 
+import { store } from "./store";
 import Home from "./pages/home";
-import Search from "./pages/search";
-import SearchBar from "./components/Home/SearchBar";
-import SearchInput from "./components/Search/SearchInput";
+import Cart from "./pages/cart";
 
 export type RootStackParamList = {
   Home: undefined;
-  Search: undefined;
+  Cart: undefined;
 };
 
 const AuthStack = createStackNavigator<RootStackParamList>();
 
 export default function App() {
-  
-
   return (
     <Provider store={store}>
       <NavigationContainer>
         <AuthStack.Navigator initialRouteName="Home">
-          <AuthStack.Screen
-            name="Home"
-            component={Home}
-            options={{
-              header: (_props: StackHeaderProps) => <SearchBar />,
-            }}
-          />
-          <AuthStack.Screen
-            name="Search"
-            component={Search}
-            options={{
-              header: (_props: StackHeaderProps) => <SearchInput />,
-            }}
-          />
+          <AuthStack.Screen name="Home" component={Home} />
+          <AuthStack.Screen name="Cart" component={Cart} />
         </AuthStack.Navigator>
       </NavigationContainer>
     </Provider>
