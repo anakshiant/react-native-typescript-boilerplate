@@ -16,7 +16,7 @@
     "@types/react-native-popup-dialog": "^0.16.2",
     "@types/realm": "^1.13.0",
     "@types/styled-components": "^5.1.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "expo": "~37.0.3",
     "expo-file-system": "^8.1.0",
     "expo-sqlite": "^8.1.0",
